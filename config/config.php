@@ -9,11 +9,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database Credentials
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'spk_siswa_fuzzy');
+// Database Credentials (from env or fallback for local)
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_NAME', getenv('DB_NAME') ?: 'spk_siswa_fuzzy');
 
 try {
     $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS, [
@@ -63,10 +63,9 @@ try {
 
 // Base Path URL helper
 function base_url($path = '') {
-    $project_name = 'spk_kayawan';
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     $host = $_SERVER['HTTP_HOST'];
-    return $protocol . "://" . $host . "/" . $project_name . "/" . ltrim($path, '/');
+    return $protocol . "://" . $host . "/" . ltrim($path, '/');
 }
 
 // Redirect helper
