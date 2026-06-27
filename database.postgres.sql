@@ -70,5 +70,5 @@ CREATE INDEX IF NOT EXISTS idx_siswa_tahun_ajaran ON siswa(tahun_ajaran);
 
 -- Seed data: default admin user (password: admin123)
 INSERT INTO users (username, password, nama, role) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', 'admin')
-ON CONFLICT (username) DO NOTHING;
+('admin', '$2y$12$4NtiCkKR.vHYpP4/wvVWb.bAF3sSeQOrMjXdKa35mOMUqKMwVJwtK', 'Administrator', 'admin')
+ON CONFLICT (username) DO UPDATE SET password = EXCLUDED.password;
