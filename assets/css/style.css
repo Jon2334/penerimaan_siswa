@@ -93,7 +93,7 @@ body {
 /* Adjust main content width on desktop */
 .main-content {
     margin-left: 260px;
-    width: calc(100% - 260px);
+    width: 100%;
     padding: 2rem;
     min-height: 100vh;
     transition: all 0.3s ease;

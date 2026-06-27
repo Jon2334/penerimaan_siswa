@@ -36,7 +36,7 @@ $current_page = $_SERVER['REQUEST_URI'];
         <div class="sidebar-brand">
             <i class="fa-solid fa-graduation-cap text-primary"></i>
             <span>SPK MAMDANI</span>
-
+        </div>
         
         <nav class="sidebar-nav">
             <div class="nav-heading">MENU UTAMA</div>
