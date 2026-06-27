@@ -20,7 +20,9 @@ if (isset($_SESSION['user_id'])) {
     <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet">
+    <style>
+        <?php echo file_get_contents(__DIR__ . '/../../assets/css/style.css'); ?>
+    </style>
 </head>
 <body class="login-bg">
 
