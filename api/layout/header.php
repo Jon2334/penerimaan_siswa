@@ -22,6 +22,29 @@ $current_page = $_SERVER['REQUEST_URI'];
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Custom Style -->
     <link href="<?php echo base_url('assets/css/style.css'); ?>" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --sidebar-bg: #1e293b;
+        }
+        .sidebar {
+            position: fixed; top: 0; bottom: 0; left: 0; width: 260px;
+            background: var(--sidebar-bg); color: #94a3b8; z-index: 100;
+            transition: transform .3s ease;
+        }
+        .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 1.5rem; font-weight: 700; color: #fff; border-bottom: 1px solid rgba(255,255,255,.08); }
+        .nav-link-custom { color: #94a3b8 !important; display: flex; align-items: center; gap: 12px; padding: .75rem 1.5rem; text-decoration: none; border-left: 4px solid transparent; transition: all .2s ease; }
+        .nav-link-custom:hover { color: #fff !important; background: #334155; }
+        .nav-link-custom.active { color: #fff !important; border-left-color: var(--primary-color); background: rgba(79,70,229,.15); font-weight: 600; }
+        .nav-link-custom i { width: 20px; text-align: center; }
+        .nav-heading { padding: .75rem 1.5rem .25rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; color: #64748b; }
+        .main-content { margin-left: 260px; padding: 2rem; min-height: 100vh; transition: margin .3s ease; }
+        @media (max-width: 991.98px) {
+            .sidebar { transform: translateX(-260px); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 1rem; }
+        }
+    </style>
     <!-- jQuery (Required for inline scripts) -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- SweetAlert2 JS -->
