@@ -21,7 +21,9 @@ $current_page = $_SERVER['REQUEST_URI'];
     <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Custom Style -->
-    <link href="<?php echo base_url('assets/css/style.css'); ?>?v=2" rel="stylesheet">
+    <style>
+        <?php echo file_get_contents(__DIR__ . '/../../assets/css/style.css'); ?>
+    </style>
     <style>
         *, *::before, *::after { box-sizing: border-box; }
         body { background: #f8fafc; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; min-height: 100vh; }
