@@ -90,13 +90,12 @@ body {
     text-align: center;
 }
 
-/* Main Content Area */
+/* Adjust main content width on desktop */
 .main-content {
+    width: calc(100% - 260px);
     margin-left: 260px;
-    padding: 2rem;
-    min-height: 100vh;
-    transition: all 0.3s ease;
 }
+
 
 /* Header Navbar */
 .top-navbar {
@@ -252,5 +251,6 @@ body {
     }
     .main-content {
         margin-left: 0;
+        padding: 1rem;
     }
 }
