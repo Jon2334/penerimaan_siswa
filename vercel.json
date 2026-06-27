@@ -1,10 +1,14 @@
 {
-  "functions": {
-    "**/*.php": {
-      "runtime": "vercel-php@0.9.0"
-    }
-  },
+  "functions": { "api/**/*.php": { "runtime": "vercel-php@0.9.0" } },
   "rewrites": [
-    { "source": "/", "destination": "/index.php" }
+    { "source": "/login/(.*)", "destination": "/api/login/$1" },
+    { "source": "/dashboard/(.*)", "destination": "/api/dashboard/$1" },
+    { "source": "/nilai/(.*)", "destination": "/api/nilai/$1" },
+    { "source": "/siswa/(.*)", "destination": "/api/siswa/$1" },
+    { "source": "/laporan/(.*)", "destination": "/api/laporan/$1" },
+    { "source": "/fuzzy/(.*)", "destination": "/api/fuzzy/$1" },
+    { "source": "/layout/(.*)", "destination": "/api/layout/$1" },
+    { "source": "/config/(.*)", "destination": "/api/config/$1" },
+    { "source": "/", "destination": "/api/index.php" }
   ]
 }
