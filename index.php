@@ -1,5 +1,10 @@
-<?php
-// index.php - Redirect to Login
-header("Location: login/index.php");
-exit;
-?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="refresh" content="0; url=/login/index.php" />
+<title>Redirecting...</title>
+</head>
+<body>
+Redirecting to login...
+</body>
+</html>
