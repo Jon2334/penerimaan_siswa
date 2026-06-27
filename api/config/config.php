@@ -93,7 +93,17 @@ if (session_status() == PHP_SESSION_NONE) {
 function base_url($path = '') {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     $host = $_SERVER['HTTP_HOST'];
-    return $protocol . "://" . $host . "/" . ltrim($path, '/');
+    // Determine the project root relative to the web server root
+    $script_name = $_SERVER['SCRIPT_NAME'];
+    // e.g. /spk_kayawan/api/layout/header.php or /api/layout/header.php
+    $dir = dirname($script_name);
+    // Go up two levels (from api/layout to project root)
+    $base_path = dirname(dirname($dir));
+    // Normalize: on Linux / Vercel, dirname('/api/layout') = '/api', dirname('/api') = '/'
+    if ($base_path === '/' || $base_path === '\\') {
+        $base_path = '';
+    }
+    return $protocol . "://" . $host . $base_path . "/" . ltrim($path, '/');
 }
 
 // Redirect helper
