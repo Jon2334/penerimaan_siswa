@@ -63,6 +63,13 @@ CREATE TABLE IF NOT EXISTS hasil_seleksi (
     CONSTRAINT fk_hasil_siswa FOREIGN KEY (id_siswa) REFERENCES siswa(id_siswa) ON DELETE CASCADE
 );
 
+-- Sessions table for DB-based sessions (Vercel stateless fix)
+CREATE TABLE IF NOT EXISTS sessions (
+    id VARCHAR(128) PRIMARY KEY,
+    data TEXT NOT NULL DEFAULT '',
+    last_accessed TIMESTAMP DEFAULT NOW()
+);
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_nilai_siswa_id_siswa ON nilai_siswa(id_siswa);
 CREATE INDEX IF NOT EXISTS idx_hasil_seleksi_id_siswa ON hasil_seleksi(id_siswa);

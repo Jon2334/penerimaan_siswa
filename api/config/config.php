@@ -4,6 +4,37 @@
 // Set timezone
 date_default_timezone_set('Asia/Jakarta');
 
+// Custom PDO session handler for stateless Vercel environment
+class PdoSessionHandler implements SessionHandlerInterface {
+    private $pdo;
+    public function __construct(PDO $pdo) { $this->pdo = $pdo; }
+    public function open($savePath, $sessionName): bool { return true; }
+    public function close(): bool { return true; }
+    public function read($sessionId): string {
+        $stmt = $this->pdo->prepare("SELECT data FROM sessions WHERE id = ? AND last_accessed > NOW() - INTERVAL '24 hours'");
+        $stmt->execute([$sessionId]);
+        $row = $stmt->fetchColumn();
+        return $row ? $row : '';
+    }
+    public function write($sessionId, $data): bool {
+        $stmt = $this->pdo->prepare("INSERT INTO sessions (id, data, last_accessed) VALUES (?, ?, NOW()) ON CONFLICT (id) DO UPDATE SET data = ?, last_accessed = NOW()");
+        $stmt->execute([$sessionId, $data, $data]);
+        return true;
+    }
+    public function destroy($sessionId): bool {
+        $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE id = ?");
+        $stmt->execute([$sessionId]);
+        return true;
+    }
+    public function gc($maxLifetime): int {
+        $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE last_accessed < NOW() - INTERVAL '24 hours'");
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+}
+
+session_set_save_handler(new PdoSessionHandler($pdo), true);
+
 // Start session if not started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
