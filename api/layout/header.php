@@ -21,7 +21,9 @@ $current_page = $_SERVER['REQUEST_URI'];
     <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Custom Style -->
-    <link href="<?php echo base_url('assets/css/style.css'); ?>" rel="stylesheet">
+    <style>
+        <?php echo file_get_contents(__DIR__ . '/../../assets/css/style.css'); ?>
+    </style>
     <!-- jQuery (Required for inline scripts) -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- SweetAlert2 JS -->
@@ -99,4 +101,4 @@ $current_page = $_SERVER['REQUEST_URI'];
         </header>
         
         <!-- Content gets injected here -->
-    </div>
+
