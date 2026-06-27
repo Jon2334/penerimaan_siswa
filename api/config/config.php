@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Parse NEON_DATABASE_URL if set (format: postgresql://user:pass@host:port/dbname)
+// Parse NEON_DATABASE_URL if set (format: postgresql://user:pass@host:port/dbname?options=...&sslmode=require)
 $neon_url = getenv('NEON_DATABASE_URL');
 if ($neon_url) {
     $parts = parse_url($neon_url);
@@ -18,25 +18,26 @@ if ($neon_url) {
     $db_user = $parts['user'] ?? '';
     $db_pass = $parts['pass'] ?? '';
     $db_name = isset($parts['path']) ? ltrim($parts['path'], '/') : '';
+    $db_options = $parts['query'] ?? '';
 } else {
     $db_host = getenv('DB_HOST') ?: 'localhost';
     $db_port = getenv('DB_PORT') ?: '5432';
     $db_user = getenv('DB_USER') ?: 'postgres';
     $db_pass = getenv('DB_PASS') ?: '';
     $db_name = getenv('DB_NAME') ?: 'spk_siswa_fuzzy';
+    $db_options = '';
 }
 
 try {
-    $pdo = new PDO(
-        "pgsql:host=" . $db_host . ";port=" . $db_port . ";dbname=" . $db_name,
-        $db_user,
-        $db_pass,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ]
-    );
+    $dsn = "pgsql:host=" . $db_host . ";port=" . $db_port . ";dbname=" . $db_name;
+    if ($db_options) {
+        $dsn .= ";" . str_replace('&', ';', $db_options);
+    }
+    $pdo = new PDO($dsn, $db_user, $db_pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
 } catch (PDOException $e) {
     die("Koneksi Database Gagal: " . $e->getMessage());
 }
