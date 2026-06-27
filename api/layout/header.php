@@ -21,34 +21,17 @@ $current_page = $_SERVER['REQUEST_URI'];
     <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Custom Style -->
-    <link href="<?php echo base_url('assets/css/style.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/style.css'); ?>?v=2" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #4f46e5;
-            --sidebar-bg: #1e293b;
-        }
-        * { box-sizing: border-box; }
-        body { background: #f8fafc; font-family: 'Outfit', -apple-system, sans-serif; }
-        .sidebar { position: fixed; top: 0; bottom: 0; left: 0; width: 260px; background: var(--sidebar-bg); color: #94a3b8; z-index: 100; transition: transform .3s ease; overflow-y: auto; }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { background: #f8fafc; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; min-height: 100vh; }
+        .sidebar { position: fixed; top: 0; bottom: 0; left: 0; width: 260px; background: #1e293b; color: #94a3b8; z-index: 100; transition: transform .3s ease; overflow-y: auto; }
         .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 1.5rem; font-weight: 700; color: #fff; border-bottom: 1px solid rgba(255,255,255,.08); }
-        .nav-link-custom { color: #94a3b8 !important; display: flex; align-items: center; gap: 12px; padding: .75rem 1.5rem; text-decoration: none; border-left: 4px solid transparent; transition: all .2s ease; }
+        .nav-link-custom { color: #94a3b8 !important; display: flex; align-items: center; gap: 12px; padding: .75rem 1.5rem; text-decoration: none; border-left: 4px solid transparent; }
         .nav-link-custom:hover { color: #fff !important; background: #334155; }
-        .nav-link-custom.active { color: #fff !important; border-left-color: var(--primary-color); background: rgba(79,70,229,.15); font-weight: 600; }
+        .nav-link-custom.active { color: #fff !important; border-left-color: #4f46e5; background: rgba(79,70,229,.15); font-weight: 600; }
         .nav-link-custom i { width: 20px; text-align: center; }
-        .nav-heading { padding: .75rem 1.5rem .25rem; font-size: .75rem; font-weight: 700; text-transform: uppercase; color: #64748b; }
-        .main-content { margin-left: 260px; width: calc(100% - 260px); padding: 2rem; min-height: 100vh; transition: margin .3s ease; }
-        .top-navbar { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.05); margin-bottom: 2rem; padding: .75rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .card-custom { background: #fff; border: none; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,.05); margin-bottom: 1rem; }
-        .card-custom:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1); }
-        .card-header-custom { background: transparent; border-bottom: 1px solid #f1f5f9; padding: 1.25rem 1.5rem; font-weight: 600; }
-        .stat-card { padding: 1.5rem; border-radius: 12px; color: white; box-shadow: 0 10px 15px -3px rgba(0,0,0,.05); }
-        .bg-grad-primary { background: linear-gradient(135deg,#4f46e5,#818cf8); }
-        .bg-grad-success { background: linear-gradient(135deg,#10b981,#34d399); }
-        .bg-grad-danger { background: linear-gradient(135deg,#ef4444,#f87171); }
-        .bg-grad-warning { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
-        .table thead th { background: var(--primary-color); color: #fff; }
-        .btn-primary-custom { background: var(--primary-color); border-color: var(--primary-color); color: white !important; padding: .5rem 1.25rem; border-radius: 8px; }
-        .btn-primary-custom:hover { background: #4338ca; border-color: #4338ca; }
+        .main-content { margin-left: 260px; width: calc(100% - 260px); padding: 2rem; min-height: 100vh; }
         @media (max-width: 991.98px) {
             .sidebar { transform: translateX(-260px); }
             .sidebar.active { transform: translateX(0); }
