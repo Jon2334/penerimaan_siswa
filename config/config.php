@@ -9,56 +9,36 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database Credentials (from env or fallback for local)
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
-define('DB_NAME', getenv('DB_NAME') ?: 'spk_siswa_fuzzy');
+// Parse NEON_DATABASE_URL if set (format: postgresql://user:pass@host:port/dbname)
+$neon_url = getenv('NEON_DATABASE_URL');
+if ($neon_url) {
+    $parts = parse_url($neon_url);
+    $db_host = $parts['host'] ?? 'localhost';
+    $db_port = $parts['port'] ?? '5432';
+    $db_user = $parts['user'] ?? '';
+    $db_pass = $parts['pass'] ?? '';
+    $db_name = isset($parts['path']) ? ltrim($parts['path'], '/') : '';
+} else {
+    $db_host = getenv('DB_HOST') ?: 'localhost';
+    $db_port = getenv('DB_PORT') ?: '5432';
+    $db_user = getenv('DB_USER') ?: 'postgres';
+    $db_pass = getenv('DB_PASS') ?: '';
+    $db_name = getenv('DB_NAME') ?: 'spk_siswa_fuzzy';
+}
 
 try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
-} catch (PDOException $e) {
-    // If database doesn't exist, connect to MySQL server to create it or show error
-    try {
-        $pdo_init = new PDO("mysql:host=" . DB_HOST . ";charset=utf8mb4", DB_USER, DB_PASS, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]);
-        $pdo_init->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "`");
-        $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS, [
+    $pdo = new PDO(
+        "pgsql:host=" . $db_host . ";port=" . $db_port . ";dbname=" . $db_name,
+        $db_user,
+        $db_pass,
+        [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false,
-        ]);
-    } catch (PDOException $ex) {
-        die("Koneksi Database Gagal: " . $ex->getMessage());
-    }
-}
-
-// Auto-run schema migration if users table is missing
-try {
-    $table_exists = $pdo->query("SHOW TABLES LIKE 'users'")->rowCount() > 0;
-    if (!$table_exists) {
-        $sql_path = __DIR__ . '/../database.sql';
-        if (file_exists($sql_path)) {
-            $sql = file_get_contents($sql_path);
-            
-            // Remove comments and execute queries
-            $sql_clean = preg_replace('/--.*\n/', '', $sql);
-            $queries = explode(';', $sql_clean);
-            foreach ($queries as $query) {
-                $q = trim($query);
-                if (!empty($q)) {
-                    $pdo->exec($q);
-                }
-            }
-        }
-    }
+        ]
+    );
 } catch (PDOException $e) {
-    // Silently proceed or log, to avoid breaking execution if check fails
+    die("Koneksi Database Gagal: " . $e->getMessage());
 }
 
 // Base Path URL helper
