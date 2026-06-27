@@ -8,7 +8,7 @@ require_once __DIR__ . '/config/config.php';
 
 echo "Running database migration...\n";
 
-$sql_path = __DIR__ . '/database.postgres.sql';
+$sql_path = __DIR__ . '/../database.postgres.sql';
 
 if (!file_exists($sql_path)) {
     die("Migration file not found: $sql_path\n");
