@@ -3,7 +3,6 @@
             <small>&copy; <?= date('Y'); ?> SPK Seleksi Penerimaan Siswa Baru - Fuzzy Mamdani. All rights reserved.</small>
         </footer>
 
-</div>
 </main>
 
     <!-- Bootstrap 5 Bundle JS -->
