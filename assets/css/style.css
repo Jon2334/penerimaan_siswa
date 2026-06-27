@@ -22,6 +22,12 @@ body {
     background-color: var(--background-color);
     color: #334155;
     overflow-x: hidden;
+    min-height: 100vh;
+}
+.container-fluid {
+    max-width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 /* Sidebar Styling */
@@ -36,6 +42,7 @@ body {
     background-color: var(--sidebar-bg);
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    overflow-y: auto;
 }
 
 .sidebar-brand {
@@ -99,6 +106,7 @@ body {
     padding: 2rem;
     min-height: 100vh;
     transition: all 0.3s ease;
+    overflow-x: hidden;
 }
 
 
