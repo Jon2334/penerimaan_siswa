@@ -21,6 +21,17 @@ if ($neon_url) {
     $db_options = $parts['query'] ?? '';
     // Remove channel_binding param as Neon doesn't support it
     $db_options = preg_replace('/channel_binding=[^&]*&?/', '', $db_options);
+    // Add endpoint ID option for Neon SNI
+    $host_parts = explode('.', $db_host);
+    $endpoint = $host_parts[0] ?? '';
+    if ($endpoint && strpos($endpoint, 'ep-') === 0) {
+        $endpoint_opt = 'options=endpoint%3D' . $endpoint;
+        if ($db_options) {
+            $db_options .= '&' . $endpoint_opt;
+        } else {
+            $db_options = $endpoint_opt;
+        }
+    }
 } else {
     $db_host = getenv('DB_HOST') ?: 'localhost';
     $db_port = getenv('DB_PORT') ?: '5432';
