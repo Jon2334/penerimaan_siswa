@@ -34,7 +34,7 @@ $current_page = $_SERVER['REQUEST_URI'];
         <div class="sidebar-brand">
             <i class="fa-solid fa-graduation-cap text-primary"></i>
             <span>SPK MAMDANI</span>
-        </div>
+
         
         <nav class="sidebar-nav">
             <div class="nav-heading">MENU UTAMA</div>
@@ -95,7 +95,8 @@ $current_page = $_SERVER['REQUEST_URI'];
                     <?= isset($_SESSION['user_nama']) ? sanitize($_SESSION['user_nama']) : 'Administrator'; ?> (<?= isset($_SESSION['user_role']) ? sanitize($_SESSION['user_role']) : 'Admin'; ?>)
                 </span>
                 <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['user_nama'] ?? 'Admin'); ?>&background=4f46e5&color=fff" alt="Profile avatar" class="rounded-circle" width="40" height="40">
-            </div>
+
         </header>
         
         <!-- Content gets injected here -->
+    </div>
