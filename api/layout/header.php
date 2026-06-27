@@ -84,8 +84,8 @@ $current_page = $_SERVER['REQUEST_URI'];
 
     <!-- Content Area Container -->
     <main class="main-content" id="main-content">
-        <div class="container-fluid">
-            <!-- Top Navbar -->
+
+            <div class="container-fluid">
         <header class="top-navbar">
             <button class="btn btn-light d-lg-none" id="sidebar-toggle">
                 <i class="fa-solid fa-bars"></i>
