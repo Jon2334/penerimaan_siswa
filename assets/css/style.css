@@ -117,6 +117,7 @@ body {
     border-radius: var(--border-radius-md);
     box-shadow: var(--card-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
 }
 
 .card-custom:hover {
@@ -244,10 +245,10 @@ body {
 /* Responsive sidebar */
 @media (max-width: 991.98px) {
     .sidebar {
-        margin-left: -260px;
+        transform: translateX(-260px);
     }
     .sidebar.active {
-        margin-left: 0;
+        transform: translateX(0);
     }
     .main-content {
         margin-left: 0;

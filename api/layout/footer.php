@@ -2,6 +2,7 @@
         <footer class="mt-5 py-3 border-top text-center text-muted">
             <small>&copy; <?= date('Y'); ?> SPK Seleksi Penerimaan Siswa Baru - Fuzzy Mamdani. All rights reserved.</small>
         </footer>
+    </div>
     </main>
 
     <!-- Bootstrap 5 Bundle JS -->
