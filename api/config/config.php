@@ -19,6 +19,8 @@ if ($neon_url) {
     $db_pass = $parts['pass'] ?? '';
     $db_name = isset($parts['path']) ? ltrim($parts['path'], '/') : '';
     $db_options = $parts['query'] ?? '';
+    // Remove channel_binding param as Neon doesn't support it
+    $db_options = preg_replace('/channel_binding=[^&]*&?/', '', $db_options);
 } else {
     $db_host = getenv('DB_HOST') ?: 'localhost';
     $db_port = getenv('DB_PORT') ?: '5432';
