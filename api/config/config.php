@@ -33,12 +33,7 @@ class PdoSessionHandler implements SessionHandlerInterface {
     }
 }
 
-session_set_save_handler(new PdoSessionHandler($pdo), true);
-
-// Start session if not started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+// (session handler initialized after PDO below)
 
 // Parse NEON_DATABASE_URL if set (format: postgresql://user:pass@host:port/dbname?options=...&sslmode=require)
 $neon_url = getenv('NEON_DATABASE_URL');
@@ -84,6 +79,14 @@ try {
     ]);
 } catch (PDOException $e) {
     die("Koneksi Database Gagal: " . $e->getMessage());
+}
+
+// Initialize session handler with PDO
+session_set_save_handler(new PdoSessionHandler($pdo), true);
+
+// Start session if not started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
 // Base Path URL helper
