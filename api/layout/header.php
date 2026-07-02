@@ -80,6 +80,11 @@ $current_page = $_SERVER['REQUEST_URI'];
                 <i class="fa-solid fa-sliders"></i>
                 <span>Kuota Penerimaan</span>
             </a>
+            
+            <a href="<?= base_url('grafik/index.php'); ?>" class="nav-link-custom <?= (strpos($current_page, 'grafik') !== false) ? 'active' : ''; ?>">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Grafik Keanggotaan</span>
+            </a>
 
             <a href="<?= base_url('fuzzy/aturan.php'); ?>" class="nav-link-custom <?= (strpos($current_page, 'aturan.php') !== false) ? 'active' : ''; ?>">
                 <i class="fa-solid fa-scale-balanced"></i>
