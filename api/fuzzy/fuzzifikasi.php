@@ -1,7 +1,7 @@
 <?php
 // fuzzy/fuzzifikasi.php - Fuzzification Step Viewer
 require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/../function/fuzzy_engine.php';
+require_once __DIR__ . '/../../function/fuzzy_engine.php';
 check_login();
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {

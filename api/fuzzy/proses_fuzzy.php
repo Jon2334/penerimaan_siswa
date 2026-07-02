@@ -1,7 +1,7 @@
 <?php
 // fuzzy/proses_fuzzy.php - Orchestrator to Run Fuzzy Mamdani Calculations for All Students
 require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/../function/fuzzy_engine.php';
+require_once __DIR__ . '/../../function/fuzzy_engine.php';
 check_login();
 
 try {
