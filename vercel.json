@@ -10,6 +10,7 @@
     { "source": "/siswa/(.*)", "destination": "/api/siswa/$1" },
     { "source": "/laporan/(.*)", "destination": "/api/laporan/$1" },
     { "source": "/fuzzy/(.*)", "destination": "/api/fuzzy/$1" },
+    { "source": "/grafik/(.*)", "destination": "/api/grafik/$1" },
     { "source": "/layout/(.*)", "destination": "/api/layout/$1" },
     { "source": "/config/(.*)", "destination": "/api/config/$1" },
     { "source": "/", "destination": "/api/index.php" }
